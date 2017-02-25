@@ -1,4 +1,5 @@
 # https://github.com/mikemrm/CloudFlare-ChromeHistory
+from __future__ import print_function
 import os, sys, re, sqlite3, shutil, httplib
 
 def loadHistory(path):
@@ -30,19 +31,15 @@ def loadHistory(path):
 	return history
 
 def loadAffected():
-	print('Getting https://raw.githubusercontent.com/pirate/sites-using-cloudflare/master/README.md')
+	print('Getting https://raw.githubusercontent.com/pirate/sites-using-cloudflare/master/sorted_unique_cf.txt')
 	conn = httplib.HTTPSConnection('raw.githubusercontent.com')
-	conn.request('GET', '/pirate/sites-using-cloudflare/master/README.md')
+	conn.request('GET', '/pirate/sites-using-cloudflare/master/sorted_unique_cf.txt')
 	res = conn.getresponse()
 	if res.status == 200:
 		print('OK!')
+		print('Loading domains, this may take a while...')
 		text = res.read()
-		site_lines = text.split('Notable Sites')[1].split("\n")
-		affected = []
-		for line in site_lines:
-			domain_parts = line.split()
-			if len(domain_parts) > 1 and domain_parts[0] == '-' and not (domain_parts[1] in affected):
-				affected.append(domain_parts[1])
+		affected = text.split("\n")
 		return affected
 
 if __name__ == '__main__':
@@ -57,8 +54,19 @@ if __name__ == '__main__':
 	print('Domains in history: ' + str(len(history_domains)))
 	print('Getting affected domains...')
 	affected_domains = loadAffected()
-	print('Affected domains: ' + str(len(affected_domains)))
+	affected_count = len(affected_domains)
+	print('Affected domains: ' + str(affected_count))
+	found_count = 0
+	checked_count = 0
 	found_domains = []
+	for domain in affected_domains:
+		if checked_count % 1000:
+			print("\rProcessed " + str(checked_count) + '/' + str(affected_count), end="")
+		if domain in history_domains:
+			print("\nFound " + str(domain))
+			found_domains.append(str(domain))
+		checked_count += 1
+
 	for domain in history_domains:
 		if domain in affected_domains:
 			found_domains.append(domain)
