@@ -59,17 +59,21 @@ if __name__ == '__main__':
 	found_count = 0
 	checked_count = 0
 	found_domains = []
+	last_domain = ''
+	last_length = 0
 	for domain in affected_domains:
 		if checked_count % 1000:
-			print("\rProcessed " + str(checked_count) + '/' + str(affected_count), end="")
+			msg = "Processed " + str(checked_count) + '/' + str(affected_count)
+			msg_length = len(msg)
+			if msg_length < last_length:
+				msg += ' ' * (msg_length - last_length)
+				last_length = msg_length
+			print("\r" + msg, end="")
 		if domain in history_domains:
-			print("\nFound " + str(domain))
+			last_domain = str(domain)
 			found_domains.append(str(domain))
 		checked_count += 1
 
-	for domain in history_domains:
-		if domain in affected_domains:
-			found_domains.append(domain)
-	print("Below are affected websites you've visited.")
+	print("\nBelow are affected websites you've visited.")
 	print("\r\n".join(found_domains))
 	print('Total: ' + str(len(found_domains)))
