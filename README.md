@@ -5,6 +5,8 @@ This has only been tested in windows 10 with a standard install of Google Chrome
 
 If your history file is in a different location, you can pass it as the first argument for the script.
 
+The following example was using the smaller list found in the README which was much smaller.
+
 Example:
 ```
 >D:\Python27\python.exe view_py2.py
