@@ -1,16 +1,17 @@
-# CloudFlare-ChromeHistory
+# CloudFlare-ChromeHistory & now firefox as well
 Compares your chrome history against @pirate list of affected sites.
 
-This has only been tested in windows 10 with a standard install of Google Chrome.
+This has only been tested in windows 10 with a standard install of Google Chrome & Firefox.
 
-If your history file is in a different location, you can pass it as the first argument for the script.
+If your history file for chrome is in a different location, you can pass it as the first argument for the script.
 
 Example:
 ```
 >D:\Python27\python.exe view_py2.py
-Getting History...
+Getting Chrome History...
 Copying C:\Users\Mike\AppData\Local\Google\Chrome\User Data\Default\History to C:\Users\Mike\AppData\Local\Temp_History
-Domains in history: 887
+Getting Firefox History...
+Domains in history: 891
 Getting affected domains...
 Getting https://raw.githubusercontent.com/pirate/sites-using-cloudflare/master/sorted_unique_cf.txt
 OK!
