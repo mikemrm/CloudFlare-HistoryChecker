@@ -1,3 +1,4 @@
+# https://github.com/mikemrm/CloudFlare-ChromeHistory
 import os, sys, re, sqlite3, shutil, httplib
 
 def loadHistory(path):

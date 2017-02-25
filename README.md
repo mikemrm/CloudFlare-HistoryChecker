@@ -1,6 +1,10 @@
 # CloudFlare-ChromeHistory
 Compares your chrome history against @pirate list of affected sites.
 
+This has only been tested in windows 10 with a standard install of Google Chrome.
+
+If your history file is in a different location, you can pass it as the first argument for the script.
+
 Example:
 ```
 >D:\Python27\python.exe view_py2.py
