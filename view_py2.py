@@ -63,13 +63,15 @@ if __name__ == '__main__':
 	last_length = 0
 	for domain in affected_domains:
 		if checked_count % 1000:
-			msg = "Processed " + str(checked_count) + '/' + str(affected_count)
+			msg = "Processed " + str(checked_count) + '/' + str(affected_count) + ' | (' + str(found_count) + ') ' + str(last_domain)
 			msg_length = len(msg)
 			if msg_length < last_length:
-				msg += ' ' * (msg_length - last_length)
-				last_length = msg_length
+				msg += ' ' * (last_length - msg_length)
+			last_length = msg_length
 			print("\r" + msg, end="")
+
 		if domain in history_domains:
+			found_count += 1
 			last_domain = str(domain)
 			found_domains.append(str(domain))
 		checked_count += 1
