@@ -1,4 +1,4 @@
-# CloudFlare-ChromeHistory & now firefox as well
+# CloudFlare-HistoryChecker
 Compares your chrome history against @pirate list of affected sites.
 
 This has only been tested in windows 10 with a standard install of Google Chrome & Firefox.
